@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>Dashboard Template for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+    <script src="/js/jquery/dist/jquery.min.js"></script>
+    <link href="/js/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="navbar-brand" href="#"> 喵喵订单聚合列表 </a></li>
+                <li><a href="/console/privilege">去权限列表</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div style="padding-top:80px; text-align: center">
+            <span>授权</span>
+            <select id="catstaff_type" style="width: 150px">
+                <option value="0">BD</option>
+                <option value="1">未启用分类</option>
+                <option value="2">客服</option>
+                <option value="3">编辑</option>
+                <option value="4">财务</option>
+                <option value="99" selected="selected">管理员</option>
+            </select>
+            <span>功能</span>
+            <select id="privilege_id" style="width: 150px">
+                #foreach($p in $allPrivilegeList)
+                    <option value="$p.id">$p.name</option>
+                #end
+            </select>
+            <input id="authorize_btn" type="button" value="授权">
+            <hr style="border:1px solid #000099;"/>
+        </div>
+        <div class="col-sm-3 col-md-2 sidebar" >
+            <ul class="nav nav-sidebar">
+                #foreach($type in $typeArr)
+                    <li #if($type == $curr_type ) class="active" #end><a href="/console/privilege/authorize?type=${type}">#if($type == 0)BD#elseif($type == 1)未启用#elseif($type == 2)客服#elseif($type == 3)编辑#elseif($type == 4)财务#elseif($type == 99)管理员#end</a></li>
+                #end
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-0 main" >
+
+            <div class="table-responsive">
+                <table class="table table-condensed ">
+                    <thead>
+                    <tr>
+                        <th>角色</th>
+                        <th>功能</th>
+                        <th>URI</th>
+                        <th>说明</th>
+                    </tr>
+                    </thead>
+                    #foreach($p in $privilegeList)
+                        <tr>
+                            <td>#if($curr_type == 0)BD#elseif($curr_type == 1)未启用#elseif($curr_type == 2)客服#elseif($curr_type == 3)编辑#elseif($curr_type == 4)财务#elseif($curr_type == 99)管理员#end</td>
+                            <td>$p.name</td>
+                            <td>$p.menu_url</td>
+                            <td>#if($p.mark)$p.mark#end</td>
+                            <td>
+                                <button type="button" class="btn btn-danger" data-catstaff_type="$curr_type" data-privilege_id="$p.id">删除</button>
+                            </td>
+                        </tr>
+                    #end
+                </table>
+                <nav>
+                    <ul class="pager">
+                        #if($previous_f)
+                            <li>
+                                <a href="/console/allshop/orders?operation=$operation&shop_id=0&from=$previous_f&offset=20">Previous</a>
+                            </li>
+                        #end
+                        #if($next_f)
+                            <li>
+                                <a href="/console/allshop/orders?operation=$operation&shop_id=0&from=$next_f&offset=20">Next</a>
+                            </li>
+                        #end
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="/js/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
+<script type="text/javascript">
+    $("#query_input").keydown(function (e) {
+        var curKey = e.which;
+        if (curKey == 13) {
+            //$("#query_form").submit();
+        }
+    });
+    $("#authorize_btn").click(function (e) {
+        var catstaff_type = $("#catstaff_type option:selected").val();
+        var privilege_id = $("#privilege_id option:selected").val();
+        $.ajax({
+            type: "POST", url: "/console/privilege/authorize/binding",
+            data: {catstaff_type: catstaff_type, privilege_id: privilege_id},
+            success: function (data) {
+                if (data.code == 1) {
+                    alert(data.msg);
+                } else {
+                    alert(data.msg);
+                    location.reload();
+                }
+            }
+        });
+    });
+    $(".btn-danger").click(function () {
+        var result = confirm("是否确认删除"),
+                oThis = $(this);
+        if (result) {
+            $.ajax({
+                type: "POST", url: "/console/privilege/authorize/del",
+                data: {catstaff_type: oThis.data('catstaff_type'), privilege_id: oThis.data('privilege_id')},
+                success: function (data) {
+                    if (data.code == 0) {
+                        alert(data.msg)
+                        location.reload();
+                    }
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>

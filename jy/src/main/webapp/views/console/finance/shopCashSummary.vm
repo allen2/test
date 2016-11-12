@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cat</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link rel="shortcut icon" href="/icon/favicon.png">
+    <!-- bootstrap 3.0.2 -->
+    <link href="/system/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <!-- font Awesome -->
+    <link href="/system/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <!-- Ionicons -->
+    <link href="/system/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+    <!-- DATA TABLES -->
+    <link href="/system/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+    <!-- Theme style -->
+    <link href="/system/css/AdminLTE.css" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="skin-blue">
+<!-- header logo: style can be found in header.less -->
+<header class="header">
+    #include("/views/console/logo.html")
+    <!-- Header Navbar: style can be found in header.less -->
+    #include("/views/console/topToolBar.html")
+</header>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    <!-- Left side column. contains the logo and sidebar -->
+    #include("/views/console/tree.html")
+    <!-- Right side column. Contains the navbar and content of the page -->
+    <aside class="right-side">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                <a href="/console/allShopCashSummary">店铺结算</a>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i>财务管理</a></li>
+                <li class="active"><a href="/console/allShopCashSummary">店铺结算</a></li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+           <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <ul class="nav navbar-nav navbar-left">
+                                <li style="margin-left: 25px; margin-top:25px;">
+                                    按日期打款:
+                                </li>
+                                <li>
+                                    <div class="input-group" style="width: 100px;margin-left: 5px; margin-top: 18px;">
+                                        <input type="date" id="datefield" class="form-control" size="25" required/>
+                                        <span class="input-group-btn">
+                                            <a href="#" class="btn btn-danger">一键打款</a>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="input-group" style="margin-left: 10px; margin-top: 18px;; margin-right: 10px">
+                                        <form class="form-search" action="/console/allShopCashSummary/payBankInfo">
+                                        <input type="date" id="bankDate" class="span1" size="25" name="date"  required/>
+                                        <button type="submit" class="btn btn-success">查看银行打款信息txt</button>
+                                    	</form>
+                                    </div>
+                                </li>
+                                <li style="margin-top: 10px;">
+                                    <form class="navbar-form navbar-right" action="/console/allShopCashSummary/queryByShopName">
+                                        <input size="23" name="query" type="text" class="form-control" placeholder="按店铺名称查询...">
+                                    </form>
+                                </li>
+                                <li style="margin-left: 10px; margin-top: 10px; margin-right: 10px;">
+                                    <form class="navbar-form navbar-right" action="/console/allShopCashSummary/queryByDate">
+                                        <input size="23" name="query" type="text" class="form-control" placeholder="按日期查询:2015-04-24">
+                                    </form>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body table-responsive">
+                        	#if($showBank)
+                        	<div class="border:1px solid #f00;">
+    						<p class="text-center">$bankPayInfo</p>
+  							</div>
+                        	
+                        	#else
+                        	<table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>日期</th>
+                                    <th>商店ID</th>
+                                    <th>商店名称</th>
+                                    <th>老板名称</th>
+                                    <th>老板银行卡号</th>
+                                    <th>银行名称</th>
+                                    <th>银行识别号</th>
+                                    <th>银行卡持有人</th>
+                                    <th>打款金额</th>
+                                    <th>是否打款</th>
+                                    <th>打款操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    #foreach($query in $shopSums)
+                                    <tr>
+                                        <td>$query.id</td>
+                                        <td>$query.dateStr</td>
+                                        <td>$query.shop_id</td>
+                                        <td>$query.shop_name</td>
+                                        <td>$query.boss.name</td>
+                                        <td>$query.boss.blank_account</td>
+                                        <td>$query.boss.blank_name</td>
+                                        <td>$query.boss.blank_cnaps</td>
+                                        <td>$query.boss.blank_account_holder</td>
+                                        <td>$query.order_price_str</td>
+                                        <td class="">#if($query.status == 1)已打款#else未打款#end</td>
+                                        <td>#if($query.status != 1)
+                                            <a href="#" class="btn btn-primary btn-sm" data-sumid="${query.id}">点击打款</a>#else#end</td> 
+                                    </tr>
+                                    #end
+                                </tbody>
+                            </table>
+                            <nav>
+                                <ul class="pager">
+                                    #if($previous_f)
+                                        <li>
+                                            <a href="/console/allShopCashSummary?from=$previous_f&offset=100&value=$value">Previous</a></li>
+                                    #end
+                                    #if($next_f)
+                                        <li><a href="/console/allShopCashSummary?from=$next_f&offset=100&value=$value">Next</a></li>
+                                    #end
+                                </ul>
+                            </nav>
+                        	#end
+                            
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </aside>
+    <!-- /.right-side -->
+</div>
+
+<!-- jQuery 2.0.2 -->
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/system/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- DATA TABES SCRIPT -->
+<script src="/system/js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+<script src="/system/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+<!-- AdminLTE App -->
+<script src="/system/js/AdminLTE/app.js" type="text/javascript"></script>
+<script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
+<!-- page script -->
+<script type="text/javascript">
+    $(function () {
+        $('#dataTable').dataTable({
+            "bSort": true//排序
+        });
+        $('.edit').editable('/console/catStaff/update', {
+            tooltip: 'Click to edit...',
+            callback: function (value, settings) {
+                location.reload();
+            }
+        });
+        $(".btn-primary").click(function () {
+            var result = confirm("是否点击打款完成"),
+                    oThis = $(this);
+            if (result) {
+                $.ajax({
+                    type: "POST", url: "/console/allShopCashSummary/pay",
+                    data: {id: oThis.data('sumid')},
+                    success: function (data) {
+                        alert(data);
+                        location.reload();
+                    }
+                });
+            }
+        });
+        $(".btn-danger").click(function () {
+            if ($("#datefield").val() == '') {
+                alert("日期不能为空");
+            } else {
+                var result = confirm("是否一键打款"),
+                        oThis = $(this);
+                if (result) {
+                     var date = $("#datefield").val();
+                    $.ajax({
+                         type: "POST", url: "/console/allShopCashSummary/batchPay",
+                         data: {date: date},
+                         success: function (data) {
+                             alert(data);
+                             location.reload();
+                         }
+                     });
+                 }
+            }
+        });
+        
+    });
+    function bankInfo() {
+            if ($("#bankDate").val() == '') {
+                alert("日期不能为空");
+            } else {
+                var result = confirm("一定要在打款前查看"),
+                        oThis = $(this);
+                if (result) {
+                    window.open(window.location.host + '/' + 'console/allShopCashSummary/payBankInfo?date='+$("#bankDate").val());
+                 }
+            }
+        }
+</script>
+
+</body>
+</html>

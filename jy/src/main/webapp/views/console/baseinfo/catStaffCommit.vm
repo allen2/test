@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cat</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link rel="shortcut icon" href="/icon/favicon.png">
+    <!-- bootstrap 3.0.2 -->
+    <link href="/system/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <!-- font Awesome -->
+    <link href="/system/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <!-- Ionicons -->
+    <link href="/system/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+    <!-- DATA TABLES -->
+    <link href="/system/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+    <!-- Theme style -->
+    <link href="/system/css/AdminLTE.css" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="skin-blue">
+<!-- header logo: style can be found in header.less -->
+<header class="header">
+    #include("/views/console/logo.html")
+    <!-- Header Navbar: style can be found in header.less -->
+    #include("/views/console/topToolBar.html")
+</header>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    <!-- Left side column. contains the logo and sidebar -->
+    #include("/views/console/tree.html")
+    <!-- Right side column. Contains the navbar and content of the page -->
+    <aside class="right-side">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                员工推广
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i>基础信息</a></li>
+                <li class="active"><a href="#">员工推广</a></li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="bg-olive" style="margin-left: 10px;"><a href="/console/catStaffCommit">查看所有</a></li>
+                                <li style="margin-right: 50px;">
+                                    <form class="navbar-form navbar-right" action="/console/catStaffCommit" method="post">
+                                        <input name="value" type="text" class="form-control" placeholder="Search...">
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body table-responsive">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>用户名字</th>
+                                    <th>手机</th>
+                                    <th width="70">商店ID</th>
+                                    <th width="80">商店区域</th>
+                                    <th nowrap>商店名称</th>
+                                    <th>商店电话</th>
+                                    <th>店主电话</th>
+                                    <th>扫码条码数</th>
+                                    <th>成功条码数(去重)</th>
+                                    <th>商店地址</th>
+                                    <th>创建时间</th>
+                                    <th>修改时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    #foreach($catStaffCommt in $catStaffCommits)
+                                    <tr>
+                                        <td>$catStaffCommt.id</td>
+                                        <td class="edit" id="${catStaffCommt.id}-name">$catStaffCommt.name</td>
+                                        <td class="edit" id="${catStaffCommt.id}-phone">$catStaffCommt.phone</td>
+                                        <td>$catStaffCommt.shop_id</td>
+                                        <td class="edit" id="${catStaffCommt.id}-shop_area">#if($catStaffCommt.shop_area)$catStaffCommt.shop_area#end</td>
+                                        <td class="edit" id="${catStaffCommt.id}-shop_name">$catStaffCommt.shop_name</td>
+                                        <td class="edit" id="${catStaffCommt.id}-shop_tel">$catStaffCommt.shop_tel</td>
+                                        <td class="edit" id="${catStaffCommt.id}-shop_owner_phone">$catStaffCommt.shop_owner_phone</td>
+                                        <td >$catStaffCommt.serialNo_num</td>
+                                        <td >$catStaffCommt.success_num</td>
+                                        <td class="edit" id="${catStaffCommt.id}-shop_address">$catStaffCommt.shop_address</td>
+                                        <td>$catStaffCommt.create_time</td>
+                                        <td>#if($catStaffCommt.update_time) $catStaffCommt.update_time #end</td>
+                                        <td>
+                                            <a href="#" class="btn btn-danger btn-sm" data-idd="${catStaffCommt.id}"
+                                                    data-from="#if(!$previous_f)0#end #if($previous_f) #set($i=$previous_f + 50)$i #end" data-offset="50">删除</a>
+                                        </td>
+                                    </tr>
+                                    #end
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>用户名字</th>
+                                    <th nowrap>商店ID</th>
+                                    <th nowrap>商店区域</th>
+                                    <th nowrap>商店名称</th>
+                                    <th>商店电话</th>
+                                    <th>店主电话</th>
+                                    <th>扫码条码数</th>
+                                    <th>成功条码数(去重)</th>
+                                    <th>商店地址</th>
+                                    <th>创建时间</th>
+                                    <th>修改时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                            <nav>
+                                <ul class="pager">
+                                    #if($previous_f)
+                                        <li>
+                                            <a href="/console/catStaffCommit?from=$previous_f&offset=50&value=$value">Previous</a></li>
+                                    #end
+                                    #if($next_f)
+                                        <li><a href="/console/catStaffCommit?from=$next_f&offset=50&value=$value">Next</a></li>
+                                    #end
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </aside>
+    <!-- /.right-side -->
+</div>
+<!-- ./wrapper -->
+<!-- 模态框（Modal） -->
+<div class="modal fade" style="padding-top:15%;" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h2 class="modal-title text-center" id="myModalLabel">
+                    添加员工账号
+                </h2>
+            </div>
+            <div class="modal-body container" style="width: 80%">
+                <form class="form-horizontal" method="post" action="/console/catStaff/insert">
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="姓名" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="phone" class="form-control" placeholder="电话" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="pwd" class="form-control" placeholder="密码" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="cpwd" class="form-control" placeholder="确认密码" required>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" id="add">添加</button>
+                </form>
+            </div>
+        #* <div class="modal-footer text-center">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary">提交更改</button>
+    </div>*#
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- jQuery 2.0.2 -->
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/system/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- DATA TABES SCRIPT -->
+<script src="/system/js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+<script src="/system/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+<!-- AdminLTE App -->
+<script src="/system/js/AdminLTE/app.js" type="text/javascript"></script>
+<script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
+<!-- page script -->
+<script type="text/javascript">
+    $(function () {
+        $('#dataTable').dataTable({
+            "bSort": true//排序
+        });
+        $('.edit').editable('/console/catStaffCommit/update', {
+            tooltip: 'Click to edit...',
+            callback: function (value, settings) {
+                location.reload();
+            }
+        });
+        $(".btn-danger").click(function () {
+            var result = confirm("是否确认删除"),
+                    oThis = $(this);
+            if (result) {
+                $.ajax({
+                    type: "POST", url: "/console/catStaffCommit/del",
+                    data: {id: oThis.data('idd'), from: oThis.data('from'), offset: oThis.data('offset')},
+                    success: function (data) {
+                        //alert(data);
+                        location.reload();
+                    }
+                });
+            }
+        });
+       /* $('#myModal').modal({
+            keyboard: true,//Esc 退出
+            show: false, // 上来不显示
+            backdrop:false//点击阴影部分不关闭
+
+        });*/
+        /*$(".btn-danger").click(function () {
+            $('#myModal').modal('show');
+        });*/
+        /*       $('#myModal').on('hide.bs.modal', function () {//当调用 hide 实例方法时触发。
+         var result = confirm("隐藏时调用我");
+         var oThis = $(this);// 关闭Model 触发
+         if (result) {
+         $.ajax({
+         type: "POST", url: "/console/shopArea/del",
+         data: {sa_id: oThis.data('sa_id')},
+         success: function (data) {
+         //alert(data);
+         location.reload();
+         }
+         });
+         }
+         });*/
+        /**
+         * 显示：$('#myModal').modal('show');
+
+         隐藏：$('#myModal').modal('hide');
+
+         开关：$('#myModal').modal('toogle');
+
+         事件:   $('#myModal').on('hidden', function () {// do something…});*/
+    });
+</script>
+
+</body>
+</html>

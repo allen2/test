@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>Dashboard Template for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+    <script src="/js/jquery/dist/jquery.min.js"></script>
+    <link href="/js/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="navbar-brand" href="#"> 喵喵订单聚合列表 </a></li>
+                <li #if($operation == 'order')class="active"#end><a href="/console/allshop/orders?operation=order&shop_id=${shop.id}">已完成订单</a></li>
+                <li #if($operation == 'unfinishedOrder')class="active"#end><a href="/console/allshop/orders?operation=unfinishedOrder&shop_id=${shop.id}">未完成订单</a></li>
+                <li #if($operation == 'neworder')class="active"#end><a href="/console/allshop/orders?operation=neworder">5分钟商家未点击配送</a></li>
+                <li #if($operation == 'userNotConfirm')class="active"#end><a href="/console/allshop/orders?operation=userNotConfirm">30分钟商家未点配送完成</a></li>
+                <li #if($operation == 'userRemaind')class="active"#end><a href="/console/allshop/orders?operation=userRemaind">催单列表</a></li>
+                <li #if($operation == 'cancelOrder')class="active"#end><a href="/console/allshop/orders?operation=cancelOrder">退单列表(商家无法配送和用户取消订单)</a></li>
+                <li>
+                    <form class="navbar-form navbar-right" action="/console/orders/advQuery">
+                        <input name="value" type="text" class="form-control" placeholder="Search...">
+                    </form>
+                </li>
+                <li class="active"><a href="/console/query/shopDetail">快速查询商店信息</a></li>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar" style="padding-top:30px">
+
+            <ul class="nav nav-sidebar">
+
+                <li class="active"><a href="#"> </a></li>
+                #foreach($shop in $shops)
+                    <li #if($shop.id == $curr_shop_d ) class="active" #end><a href="/console/allshop/orders?shop_id=${shop.id}"> $shop.name</a></li>
+                #end
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-0 main">
+
+            <h2 class="sub-header">Section title</h2>
+
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th>店铺id</th>
+                        <th>店铺名称</th>
+                        <th>订单id</th>
+                        <th>订单号</th>
+                        <th>创建时间</th>
+                        <th>状态</th>
+                        <th>地址</th>
+                        <th>总价</th>
+                        <th>是否是微信支付</th>
+                        <th nowrap>订单快照</th>
+                        #if($operation == 'order' || $operation == 'unfinishedOrder')
+                            <th>催单描述</th>
+                            <th nowrap>催单时间</th>
+                            <th>订单状态</th>
+                            <th nowrap>配送操作</th>
+                            <th nowrap>退单操作</th>
+                            <th nowrap>驳回操作</th>
+                            <th nowrap>确认收货操作</th>
+                            <th nowrap>收货码</th>
+                        #elseif($operation == 'neworder')
+                            <th>订单状态</th>
+                            <th nowrap>配送操作</th>
+                        #elseif($operation == 'userNotConfirm')
+                            <th>订单状态</th>
+                            <th nowrap>确认收货操作</th>
+                            <th nowrap>收货码</th>
+                        #elseif($operation == 'userRemaind')
+                            <th>催单描述</th>
+                            <th nowrap>催单时间</th>
+                            <th>订单状态</th>
+                            <th>催单处理</th>
+                        #else
+                            <th>订单状态</th>
+                            <th nowrap>退单操作</th>
+                            <th nowrap>驳回操作</th>
+                        #end
+                        <th nowrap>转单</th>
+
+                    </tr>
+                    </thead>
+                    #foreach($order in $orderls)
+                        <tr>
+                            <td>${order.order.shop_id}</td>
+                            <td>${order.order.shop_name4V}</td>
+                            <td>${order.order.id}</td>
+                            <td class="" id="e-${item.shop_id}-serialNo-$item.id">$order.order.order_id</td>
+                            <td class="" id="e-{$item.shop_id}-name-$item.id">$order.order.create_time</td>
+                            <td class="" id="e-{$item.shop_id}-status-$item.id">#if($order.order.status ==0 ) 待支付 #end #if($order.order.status ==1 ) 下单成功 #end  #if($order.order.status ==2) 打印完成 #end #if($order.order.status ==3) 转单#end #if($order.order.status ==4) 4#end #if($order.order.status ==5)支付失败#end</td>
+                            <td class="" id="e-{$item.shop_id}-address-$item.id">${order.order.address}  ${order.order.phone}</td>
+                            <td class="" id="e-{$item.shop_id}-price-$item.id">${order.order.price4V}元</td>
+                            <td class="" id="e-{$item.shop_id}-msg-$item.order_id">${order.order.act} - ${order.order.msg}</td>
+                            <td class="" id="e-{$item.category_id}-category_id-$item.id">$order.order.info</td>
+                            #if($operation == 'order' || $operation == 'unfinishedOrder')
+                                <td class="" nowrap><p class="text-danger">$order.remindDes</p></td>
+                                <td class="">$order.remindTime</td>
+                                <td class="" nowrap>$order.orderStatusDes</td>
+                                <td class="" nowrap>#if($order.showConfirm)
+                                    <button type="button" class="btn btn-success" data-orderid="${order.order.order_id}" data-shopid="${order.order.shop_id}">确认配送</button>#else #end</td>
+                                <td class="" nowrap>#if($order.showCancel)
+                                    <button type="button" class="btn btn-danger" data-orderid="${order.order.order_id}" data-shopid="${order.order.shop_id}">退单</button>#elseif($order.order.order_status ==4) #else 已经退单#end</td>
+                                <td class="" nowrap>#if($order.showRejected)
+                                    <button type="button" class="btn btn-warning" data-orderid="${order.order.order_id}" data-shopid="${order.order.shop_id}">驳回</button>#else #end</td>
+                                <td class="" nowrap>#if($order.showUserConfirm)
+                                    <button type="button" class="btn btn-primary" data-orderid="${order.order.order_id}" data-shopid="${order.order.shop_id}">确认收货</button>#else #end</td>
+                                <td class="" nowrap>#if($order.order.receive_code)<p class="text-error"><strong>$order.order.receive_code</strong></p>#else#end</td>
+                            #elseif($operation == 'neworder')
+                                <td class="" nowrap>$order.orderStatusDes</td>
+                                <td class="" nowrap>#if($order.showConfirm)
+                                    <button type="button" class="btn btn-success" data-orderid="${order.order.order_id}" data-shopid="${order.order.shop_id}">确认配送</button>#else #end</td>
+                            #elseif($operation == 'userNotConfirm')
+                                <td class="" nowrap>$order.orderStatusDes</td>
+                                <td class="" nowrap>#if($order.showUserConfirm)
+                                    <button type="button" class="btn btn-primary" data-orderid="${order.order.order_id}" data-shopid="${order.order.shop_id}">确认收货</button>#else #end</td>
+                                <td class="" nowrap>#if($order.order.receive_code)<p class="text-error"><strong>$order.order.receive_code</strong></p>#else#end</td>
+                            #elseif($operation == 'userRemaind')
+                                <td class="" nowrap><p class="text-danger">$order.remindDes</p></td>
+                                <td class="">$order.remindTime</td>
+                                <td class="" nowrap>$order.orderStatusDes</td>
+                                <td class="" nowrap>
+                                    <button type="button" class="btn btn-info" data-orderid="${order.order.order_id}" data-shopid="${order.order.shop_id}">处理催单完成</button>
+                                </td>
+                            #else
+                                <td class="" nowrap>$order.orderStatusDes</td>
+                                <td class="" nowrap>#if($order.showCancel)
+                                    <button type="button" class="btn btn-danger" data-orderid="${order.order.order_id}" data-shopid="${order.order.shop_id}">退单</button>#elseif($order.order.order_status ==4) #else 已经退单#end</td>
+                                <td class="" nowrap>#if($order.showRejected)
+                                    <button type="button" class="btn btn-warning" data-orderid="${order.order.order_id}" data-shopid="${order.order.shop_id}">驳回</button>#else #end</td>
+                            #end
+                            <td class="" nowrap>#if(($order.order.status==1 || $order.order.status==2 ) && ($order.order.order_status==0 ||$order.order.order_status==1))
+                                <button type="button" class="btn btn-lg" data-orderid="${order.order.order_id}" data-shopid="${order.order.shop_id}">转单</button> #end
+                            </td>
+                        </tr>
+                    #end
+                </table>
+                <nav>
+                    <ul class="pager">
+                        #if($previous_f)
+                            <li>
+                                #if($operation == 'order' || $operation == 'unfinishedOrder')
+                                    <a href="/console/allshop/orders?operation=$operation&shop_id=${shop.id}&from=$previous_f&offset=20">Previous</a>
+                                #else
+                                    <a href="/console/allshop/orders?operation=$operation&shop_id=0&from=$previous_f&offset=20">Previous</a>
+                                #end
+                            </li>
+                        #end
+                        #if($next_f)
+                        <li>
+                            #if($operation == 'order' || $operation == 'unfinishedOrder')
+                                <a href="/console/allshop/orders?operation=$operation&shop_id=${shop.id}&from=$next_f&offset=20">Next</a>
+                            #else
+                                <a href="/console/allshop/orders?operation=$operation&shop_id=0&from=$next_f&offset=20">Next</a>
+                            #end
+                        #end
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div id='register' style='position:fixed; height:200px; width:400px; background:#acc;'><em id='close' style='font-size:30px; float:right; margin-right:20px;'>×</em>
+
+    <h3 style='color:#000; text-align:center;'>转单操作</h3>
+    <br/>
+
+    <input id='nnnnn' type="hidden" name="order_id" value=""/>
+    <input id='mmmmm' type="hidden" name="shop_id" value=""/>
+
+    <div style="position: absolute;left: 25%;">
+        <label for="exampleInputFile">商店:</label>
+        <select id="ppppp" name="toshop_id" required>
+            #foreach($shop in $shops)
+                <option value="$shop.id">$shop.name</option>
+            #end
+        </select><br/>
+        <br/>
+
+        <div style="position: absolute;left: 30%;">
+            <button type="submit" id="requ" value="提交">提交</button>
+        </div>
+
+    </div>
+
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="/js/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.edit').editable('/console/shop/ud', {
+            tooltip: 'Click to edit...',
+            callback: function (value, settings) {
+                location.reload();
+            }
+        });
+        $('.edit_area').editable('/console/shop/ud', {
+            type: 'textarea',
+            cancel: 'Cancel',
+            submit: 'OK',
+            indicator: '<img src="img/indicator.gif">',
+            tooltip: 'Click to edit...'
+        });
+    });
+    $(".btn-danger").click(function () {
+        var result = confirm("是否点击退单了？"),
+                oThis = $(this);
+        if (result) {
+            $.ajax({
+                type: "POST", url: "/console/allshop/order_cancel",
+                data: {order_id: oThis.data('orderid'), shop_id: oThis.data('shopid')},
+                success: function (data) {
+                    alert(data);
+                    location.reload();
+                }
+            });
+        }
+    });
+    function on() {
+
+    }
+    $(".btn-success").click(function () {
+        var result = confirm("确认配送？"),
+                oThis = $(this);
+        if (result) {
+            $.ajax({
+                type: "POST", url: "/console/allshop/order_comfirm",
+                data: {order_id: oThis.data('orderid'), shop_id: oThis.data('shopid')},
+                success: function (data) {
+                    alert(data);
+                    location.reload();
+                }
+            });
+        }
+    });
+    $(".btn-warning").click(function () {
+        var result = confirm("是否要驳回？（此操作只作用于老板误点击无法配送或者是用户误点击取消订单）"),
+                oThis = $(this);
+        if (result) {
+            $.ajax({
+                type: "POST", url: "/console/allshop/order_reject",
+                data: {order_id: oThis.data('orderid'), shop_id: oThis.data('shopid')},
+                success: function (data) {
+                    alert(data);
+                    location.reload();
+                }
+            });
+        }
+    });
+    $(".btn-primary").click(function () {
+        var result = confirm("是否要点击确认收货？"),
+                oThis = $(this);
+        if (result) {
+            $.ajax({
+                type: "POST", url: "/console/allshop/order_user_confirm",
+                data: {order_id: oThis.data('orderid'), shop_id: oThis.data('shopid')},
+                success: function (data) {
+                    alert(data);
+                    location.reload();
+                }
+            });
+        }
+    });
+    $(".btn-info").click(function () {
+        var result = confirm("是否处理完催单？"),
+                oThis = $(this);
+        if (result) {
+            $.ajax({
+                type: "POST", url: "/console/allshop/order_remind_done",
+                data: {order_id: oThis.data('orderid'), shop_id: oThis.data('shopid')},
+                success: function (data) {
+                    alert(data);
+                    location.reload();
+                }
+            });
+        }
+    });
+    $("#query_input").keydown(function (e) {
+        var curKey = e.which;
+        if (curKey == 13) {
+            $("#query_form").submit();
+        }
+    });
+    function fileChange(item) {
+        var ss = (item.value).split('.');
+        if (ss.length == 2 && /(gif|jpg|jpeg|png|GIF|JPEG|PNG|JPG)$/.test(ss[1])) {
+            $("#fileName").val(item.value);
+        } else {
+            var obj = document.getElementById("inputfile");
+            obj.outerHTML = obj.outerHTML;
+            $("#inputfile").val("");
+            alert("用户源配置文件格式错误");
+        }
+    }
+    $(".form-add").click(function () {
+        var result = confirm("是否确认提交"),
+                oThis = $(this);
+        if (result) {
+            var pic = oThis.data('id');
+            var picVal = $('#' + pic).val();
+            if (picVal == '') {
+                alert("请上传图片");
+                return false;
+            }
+            return true;
+        }
+        return false;
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $(".btn-lg").click(function () {
+//            var result = confirm("是否点击转单了？"),
+            var oThis = $(this);
+            $("#nnnnn").attr("value", oThis.data('orderid'));
+            $("#mmmmm").attr("value", oThis.data('shopid'));
+
+            center("register");
+            showWindow();
+            $("#close").click(function () {
+                removeWindow();
+            });
+        });
+
+        $("#requ").click(function () {
+            var order_id = $("#nnnnn").val();
+            var shop_id = $("#mmmmm").val();
+            var toshop_id = $('#ppppp').find('option:selected').val();///"/"
+            $.ajax({
+                type: "POST", url: "/console/orders/transfer",
+                data: {order_id: order_id, shop_id: shop_id, toshop_id: toshop_id},
+                success: function (data) {
+                    if (data.code == 0) {
+                        removeWindow();
+                        location.reload();
+                    } else {
+                        alert("转单失败");
+                    }
+
+                },
+
+            });
+        })
+
+        function showWindow() {
+            var htm = $("#register");
+            $("body").append(htm);
+            $("#register").css("display", "block");
+        }
+
+        function removeWindow() {
+            $("#register").css("display", "none");
+        }
+
+        function center(id) {
+            var h = $(window).height();
+            var w = $(window).width();
+            var fh = $("#" + id).height();
+            var fw = $("#" + id).width();
+            $("#" + id).css({
+                "top": (h - fh) / 2,
+                "left": (w - fw) / 2,
+                "display":"none"
+            });
+        }
+
+        $(window).resize(function () {
+            center("register");
+        });
+
+    });
+
+
+</script>
+</body>
+</html>

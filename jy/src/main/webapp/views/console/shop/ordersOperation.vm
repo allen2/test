@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cat</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link rel="shortcut icon" href="/icon/favicon.png">
+    <!-- bootstrap 3.0.2 -->
+    <link href="/system/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <!-- font Awesome -->
+    <link href="/system/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <!-- Ionicons -->
+    <link href="/system/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+    <!-- DATA TABLES -->
+    <link href="/system/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+    <!-- Theme style -->
+    <link href="/system/css/AdminLTE.css" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="skin-blue">
+<!-- header logo: style can be found in header.less -->
+<header class="header">
+    #include("/views/console/logo.html")
+    <!-- Header Navbar: style can be found in header.less -->
+    #include("/views/console/topToolBar.html")
+</header>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    <!-- Left side column. contains the logo and sidebar -->
+    #include("/views/console/tree.html")
+    <!-- Right side column. Contains the navbar and content of the page -->
+    <aside class="right-side">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                操作记录
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i>客服专用</a></li>
+                <li class="active"><a href="#">操作记录</a></li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="bg-olive" style="margin-left: 10px;"><a href="/console/orders/operation">查看所有</a></li>
+                                <li style="margin-right: 50px;">
+                                    <form class="navbar-form navbar-right" action="/console/orders/operation" method="post">
+                                        <input name="value" type="text" class="form-control" placeholder="按商店查询...">
+                                        <input name="op" value="shop_name" type="hidden">
+                                    </form>
+                                </li>
+                                <li style="margin-right: 50px;">
+                                    <form class="navbar-form navbar-right" action="/console/orders/operation" method="post">
+                                        <input name="value" type="text" class="form-control" placeholder="按员工查询...">
+                                        <input name="op" value="catstaff" type="hidden">
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body table-responsive">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th nowrap>操作人</th>
+                                    <th nowrap>店铺名称</th>
+                                    <th nowrap>订单号</th>
+                                    <th>订单<br/>创建时间</th>
+                                    <th>确认<br/>配送时间</th>
+                                    <th>确认<br/>收货时间</th>
+                                    <th>催单<br/>备注</th>
+                                    <th>催单<br/>时间</th>
+                                    <th>取消<br/>订单备注</th>
+                                    <th>取消<br/>订单时间</th>
+                                    <th>转单<br/>备注</th>
+                                    <th>转单<br/>时间</th>
+                                    <th>投诉<br/>备注</th>
+                                    <th>投诉<br/>时间</th>
+                                    <th>确认<br/>配送响应</th>
+                                    <th>催单<br/>响应</th>
+                                    <th>退单<br/>响应</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    #foreach($query in $queryList)
+                                    <tr>
+                                        <td>$query.sField0</td>
+                                        <td>$query.sField2</td>
+                                        <td>$query.sField1</td>
+                                        <td>$query.sField3</td>
+                                        <td>$query.sField4</td>
+                                        <td>#if($query.sField5)$query.sField5#end</td>
+                                        <td>#if($query.sField6)$query.sField6#end</td>
+                                        <td>#if($query.sField7)$query.sField7#end</td>
+                                        <td>#if($query.sField8)$query.sField8#end</td>
+                                        <td>#if($query.sField9)$query.sField9#end</td>
+                                        <td>#if($query.sField10)$query.sField10#end</td>
+                                        <td>#if($query.sField11)$query.sField11#end</td>
+                                        <td>#if($query.sField12)$query.sField12#end</td>
+                                        <td>#if($query.sField13)$query.sField13#end</td>
+                                        <td>#if($query.sField14)$query.sField14#end</td>
+                                        <td>#if($query.sField15)$query.sField15#end</td>
+                                        <td>#if($query.sField16)$query.sField16#end</td>
+                                        <td>#if($query.sField17)$query.sField17#end</td>
+                                    </tr>
+                                    #end
+                                </tbody>
+                            </table>
+                            <nav>
+                                <ul class="pager">
+                                    #if($previous_f)
+                                        <li>
+                                            <a href="/console/orders/operation?op=$op&from=$previous_f&value=$value">Previous</a></li>
+                                    #end
+                                    #if($next_f)
+                                        <li><a href="/console/orders/operation?op=$op&from=$next_f&value=$value">Next</a></li>
+                                    #end
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </aside>
+    <!-- /.right-side -->
+</div>
+<!-- ./wrapper -->
+<!-- 模态框（Modal） -->
+<div class="modal fade" style="padding-top:10%; background-color: #2a85a0" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h2 class="modal-title text-center" id="myModalLabel">
+                    添加员工账号
+                </h2>
+            </div>
+            <form class="form-horizontal" method="post" action="/console/catStaff/insert">
+                <div class="modal-body container" style="width: 80%">
+                    <div class="form-group" style="padding-top: 30px;">
+                        <input type="text" name="name" class="form-control" placeholder="姓名" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="phone" class="form-control" placeholder="电话" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="pwd" class="form-control" placeholder="密码" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="cpwd" class="form-control" placeholder="确认密码" required>
+                    </div>
+                </div>
+                <div class="modal-footer text-center">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" id="add">添加</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- jQuery 2.0.2 -->
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/system/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- DATA TABES SCRIPT -->
+<script src="/system/js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+<script src="/system/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+<!-- AdminLTE App -->
+<script src="/system/js/AdminLTE/app.js" type="text/javascript"></script>
+<script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
+<!-- page script -->
+<script type="text/javascript">
+    $(function () {
+        $('#dataTable').dataTable({
+            "bSort": true//排序
+        });
+        $('.edit').editable('/console/catStaff/update', {
+            tooltip: 'Click to edit...',
+            callback: function (value, settings) {
+                location.reload();
+            }
+        });
+        $(".btn-danger").click(function () {
+            var result = confirm("是否确认删除"),
+                    oThis = $(this);
+            if (result) {
+                $.ajax({
+                    type: "POST", url: "/console/catStaff/del",
+                    data: {user_id: oThis.data('user_id'), from: oThis.data('from'), offset: oThis.data('offset')},
+                    success: function (data) {
+                        //alert(data);
+                        location.reload();
+                    }
+                });
+            }
+        });
+        $('#myModal').modal({
+            keyboard: true,//Esc 退出
+            show: false, // 上来不显示
+            backdrop: false//点击阴影部分不关闭
+
+        });
+        /*$(".daixiandnkasndjasndjansjdnasjdnas").click(function () {
+            $('#myModal').modal('show');
+        });*/
+        /*       $('#myModal').on('hide.bs.modal', function () {//当调用 hide 实例方法时触发。
+                   var result = confirm("隐藏时调用我");
+                   var oThis = $(this);// 关闭Model 触发
+                   if (result) {
+                       $.ajax({
+                           type: "POST", url: "/console/shopArea/del",
+                           data: {sa_id: oThis.data('sa_id')},
+                           success: function (data) {
+                               //alert(data);
+                               location.reload();
+                           }
+                       });
+                   }
+               });*/
+        /**
+         * 显示：$('#myModal').modal('show');
+
+         隐藏：$('#myModal').modal('hide');
+
+         开关：$('#myModal').modal('toogle');
+
+         事件:   $('#myModal').on('hidden', function () {// do something…});*/
+    });
+</script>
+
+</body>
+</html>

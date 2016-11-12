@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cat</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link rel="shortcut icon" href="/icon/favicon.png">
+    <!-- bootstrap 3.0.2 -->
+    <link href="/system/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <!-- font Awesome -->
+    <link href="/system/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <!-- Ionicons -->
+    <link href="/system/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+    <!-- DATA TABLES -->
+    <link href="/system/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+    <!-- Theme style -->
+    <link href="/system/css/AdminLTE.css" rel="stylesheet" type="text/css"/>
+    <!-- mask style -->
+    <link href="/system/css/mask.css" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="skin-blue">
+<!-- header logo: style can be found in header.less -->
+<header class="header">
+    #include("/views/console/logo.html")
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+
+    #*<div class="navbar-right">
+        <ul class="nav navbar-nav">
+            <!-- Messages: style can be found in dropdown.less-->
+            <li class="dropdown messages-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-envelope"></i>
+                    <span class="label label-success">4</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header">You have 4 messages</li>
+                    <li>
+                        <!-- inner menu: contains the actual data -->
+                        <ul class="menu">
+                            <li><!-- start message -->
+                                <a href="#">
+                                    <div class="pull-left">
+                                        <img src="../../img/avatar3.png" class="img-circle" alt="User Image"/>
+                                    </div>
+                                    <h4>
+                                        Support Team
+                                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                    </h4>
+                                    <p>Why not buy a new awesome theme?</p>
+                                </a>
+                            </li>
+                            <!-- end message -->
+                            <li>
+                                <a href="#">
+                                    <div class="pull-left">
+                                        <img src="../../img/avatar2.png" class="img-circle" alt="user image"/>
+                                    </div>
+                                    <h4>
+                                        AdminLTE Design Team
+                                        <small><i class="fa fa-clock-o"></i> 2 hours</small>
+                                    </h4>
+                                    <p>Why not buy a new awesome theme?</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="pull-left">
+                                        <img src="../../img/avatar.png" class="img-circle" alt="user image"/>
+                                    </div>
+                                    <h4>
+                                        Developers
+                                        <small><i class="fa fa-clock-o"></i> Today</small>
+                                    </h4>
+                                    <p>Why not buy a new awesome theme?</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="pull-left">
+                                        <img src="../../img/avatar2.png" class="img-circle" alt="user image"/>
+                                    </div>
+                                    <h4>
+                                        Sales Department
+                                        <small><i class="fa fa-clock-o"></i> Yesterday</small>
+                                    </h4>
+                                    <p>Why not buy a new awesome theme?</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="pull-left">
+                                        <img src="../../img/avatar.png" class="img-circle" alt="user image"/>
+                                    </div>
+                                    <h4>
+                                        Reviewers
+                                        <small><i class="fa fa-clock-o"></i> 2 days</small>
+                                    </h4>
+                                    <p>Why not buy a new awesome theme?</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="footer"><a href="#">See All Messages</a></li>
+                </ul>
+            </li>
+            <!-- Notifications: style can be found in dropdown.less -->
+            <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-warning"></i>
+                    <span class="label label-warning">10</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header">You have 10 notifications</li>
+                    <li>
+                        <!-- inner menu: contains the actual data -->
+                        <ul class="menu">
+                            <li>
+                                <a href="#">
+                                    <i class="ion ion-ios7-people info"></i> 5 new members joined today
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-warning danger"></i> Very long description here that may not fit into the page and may cause design problems
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-users warning"></i> 5 new members joined
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="ion ion-ios7-cart success"></i> 25 sales made
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ion ion-ios7-person danger"></i> You changed your username
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="footer"><a href="#">View all</a></li>
+                </ul>
+            </li>
+            <!-- Tasks: style can be found in dropdown.less -->
+            <li class="dropdown tasks-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-tasks"></i>
+                    <span class="label label-danger">9</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header">You have 9 tasks</li>
+                    <li>
+                        <!-- inner menu: contains the actual data -->
+                        <ul class="menu">
+                            <li><!-- Task item -->
+                                <a href="#">
+                                    <h3>
+                                        Design some buttons
+                                        <small class="pull-right">20%</small>
+                                    </h3>
+                                    <div class="progress xs">
+                                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                            <span class="sr-only">20% Complete</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <!-- end task item -->
+                            <li><!-- Task item -->
+                                <a href="#">
+                                    <h3>
+                                        Create a nice theme
+                                        <small class="pull-right">40%</small>
+                                    </h3>
+                                    <div class="progress xs">
+                                        <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                            <span class="sr-only">40% Complete</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <!-- end task item -->
+                            <li><!-- Task item -->
+                                <a href="#">
+                                    <h3>
+                                        Some task I need to do
+                                        <small class="pull-right">60%</small>
+                                    </h3>
+                                    <div class="progress xs">
+                                        <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                            <span class="sr-only">60% Complete</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <!-- end task item -->
+                            <li><!-- Task item -->
+                                <a href="#">
+                                    <h3>
+                                        Make beautiful transitions
+                                        <small class="pull-right">80%</small>
+                                    </h3>
+                                    <div class="progress xs">
+                                        <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                            <span class="sr-only">80% Complete</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <!-- end task item -->
+                        </ul>
+                    </li>
+                    <li class="footer">
+                        <a href="#">View all tasks</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- User Account: style can be found in dropdown.less -->
+            <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-user"></i>
+                    <span>Jane Doe <i class="caret"></i></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <!-- User image -->
+                    <li class="user-header bg-light-blue">
+                        <img src="../../img/avatar3.png" class="img-circle" alt="User Image"/>
+
+                        <p>
+                            Jane Doe - Web Developer
+                            <small>Member since Nov. 2012</small>
+                        </p>
+                    </li>
+                    <!-- Menu Body -->
+                    <li class="user-body">
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Followers</a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Sales</a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Friends</a>
+                        </div>
+                    </li>
+                    <!-- Menu Footer-->
+                    <li class="user-footer">
+                        <div class="pull-left">
+                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>*#
+    </nav>
+</header>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    <!-- Left side column. contains the logo and sidebar -->
+    #include("/views/console/tree.html")
+    <!-- Right side column. Contains the navbar and content of the page -->
+    <aside class="right-side">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                内部工具
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i>内部工具</a></li>
+                <li class="active"><a href="#">BD协助</a></li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="bg-olive"><a href="/console/privilege/authorize">角色授权</a></li>
+                                <li class="bg-olive" style="margin-left: 10px;"><a href="#" data-toggle="modal" data-target="#myModal">添加员工</a></li>
+                                <li class="bg-olive" style="margin-left: 10px;"><a href="/console/catStaff">查看所有</a></li>
+                                <li style="margin-right: 50px;">
+                                    <form class="navbar-form navbar-right" action="/console/catStaff" method="post">
+                                        <input name="value" type="text" class="form-control" placeholder="Search...">
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body table-responsive">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>店铺名字</th>
+                                    <th>店铺电话</th>
+                                    <th>店铺地址</th>
+                                    <th>小区绑定</th>
+                                    <th>上传条码</th>
+                                    <th>续传条码</th>
+                                    <th>上架哈哈镜</th>
+                                    <th>上架桶装水</th>
+                                    <th>上架香烟</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    #foreach($shop in $shopls)
+                                    <tr>
+                                        <td>$shop.id</td>
+                                        <td>$shop.name</td>
+                                        <td>$shop.tel</td>
+                                        <td>$shop.shop_address</td>
+                                        <td class="button" id="e-${shop.id}-bind">
+                                            <button type="button" class="e-bindButton btn btn-success" data-shopid="${shop.id}" data-shopname="${shop.name}">绑定小区</button>
+                                        </td>
+                                        <td>
+                                            <form action="/console/tools/uploadFile" method="post" enctype="multipart/form-data"
+                                                  onsubmit="return submitForm('确认上传?');">
+                                                <input type="hidden" name="shop_id" value="${shop.id}"/>
+
+                                                <div class="form-group">
+                                                    <input id="uploadFile1" type="file" name="file" required style="display:inline-block">
+                                                </div>
+                                                <div class="btn111">
+                                                    <button class="btn btn-success" type="submit">确定</button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form action="/console/tools/replenish" method="post" enctype="multipart/form-data"
+                                                  onsubmit="return submitForm('确认上传?');">
+                                                <input type="hidden" name="shop_id" value="${shop.id}"/>
+
+                                                <div class="form-group">
+                                                    <input id="uploadFile2" type="file" name="file" required style="display:inline-block">
+                                                </div>
+                                                <div class="btn111">
+                                                    <button class="btn btn-success" type="submit">确定</button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form action="/console/tools/mvhhj" method="post" onsubmit="return  submitForm('确认上架哈哈镜?');">
+                                                <input type="hidden" name="to_shop_id" value="${shop.id}"/>
+
+                                                <div class="btn111">
+                                                    <button class="btn btn-success" type="submit">确定</button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form action="/console/tools/mvtzs" method="post" onsubmit="return  submitForm('确认上架桶装水?');">
+                                                <input type="hidden" name="to_shop_id" value="${shop.id}"/>
+
+                                                <div class="btn111">
+                                                    <button class="btn btn-success" type="submit">确定</button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form action="/console/tools/mvxy" method="post" onsubmit="return  submitForm('确认上架香烟?');">
+                                                <input type="hidden" name="to_shop_id" value="${shop.id}"/>
+
+                                                <div class="btn111">
+                                                    <button class="btn btn-success" type="submit">确定</button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    #end
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>id</th>
+                                    <th>店铺名字</th>
+                                    <th>店铺电话</th>
+                                    <th>店铺地址</th>
+                                    <th>小区绑定</th>
+                                    <th>上传条码</th>
+                                    <th>续传条码</th>
+                                    <th>上架哈哈镜</th>
+                                    <th>上架桶装水</th>
+                                    <th>上架香烟</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                            <nav>
+                                <ul class="pager">
+                                    #if($previous_f)
+                                        <li>
+                                            <a href="/console/tools/help?from=$previous_f&offset=50&value=$value">Previous</a></li>
+                                    #end
+                                    #if($next_f)
+                                        <li><a href="/console/tools/help?from=$next_f&offset=50&value=$value">Next</a></li>
+                                    #end
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </aside>
+    <!-- /.right-side -->
+</div>
+<!-- ./wrapper -->
+<!-- 模态框（Modal） -->
+<div class="modal fade" style="padding-top:10%; background-color: #2a85a0" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h2 class="modal-title text-center" id="myModalLabel">
+                    添加员工账号
+                </h2>
+            </div>
+            <form class="form-horizontal" method="post" action="/console/catStaff/insert">
+                <div class="modal-body container" style="width: 80%">
+                    <div class="form-group" style="padding-top: 30px;">
+                        <input type="text" name="name" class="form-control" placeholder="姓名" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="phone" class="form-control" placeholder="电话" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="pwd" class="form-control" placeholder="密码" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="cpwd" class="form-control" placeholder="确认密码" required>
+                    </div>
+                </div>
+                <div class="modal-footer text-center">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" id="add">添加</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- z遮罩 start-->
+<div id="cover" class="cover">
+    <div id='loading-mask'></div>
+    <div id="loading">
+        <div class="loading-indicator">
+            <img src="/images/loading.gif" width="250px" height="250px" style="position:absolute;left:30%;top:13%;vertical-align:top;"/>
+            <span id="loading-msg" style="position:absolute;left:48%;top:53%;vertical-align:top;color:black;">上传中 ...</span>
+        </div>
+    </div>
+</div>
+<!-- z遮罩 end-->
+<!-- 绑定小区 start-->
+<div class="bindCom" id="bindCom" style="display: none;padding-top: 100px; width: 60%;height: 100%;">
+    <div style=";background-color: white;width: 100%;height: 100%;padding: 20px 5px">
+
+        <h1 style="text-align: center;">绑定小区:<span id="curCommunityName"></span> 到店铺:<span id="curShopName"></span></h1>
+
+        <div style="margin-top: 20px;text-align: center">
+            <input type="text" name="country" id="autocomplete" style="width: 60%" placeholder="输入小区名字"/><span>
+            <button type="button" class="btn btn-success" id="performBind">绑定此小区</button>
+        </span>
+        </div>
+        <div style="background-color: #eaeaea;margin-top: -10px; color: #111111; margin-left: 500px;">
+            <div id="autocomplete-sugg">
+            </div>
+        </div>
+        <h2 style="background-color: #eaeaea;font-size: 20px;margin-top: 20px">已经绑定的小区<span id="gettingCommunityStatus"></span></h2>
+
+        <div style="max-height: 200px;overflow: auto" id="alreadyBindCommunity"></div>
+    </div>
+</div>
+<!-- 绑定小区 end-->
+
+<!-- jQuery 2.0.2 -->
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/system/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- DATA TABES SCRIPT -->
+<script src="/system/js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+<script src="/system/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+<!-- AdminLTE App -->
+<script src="/system/js/AdminLTE/app.js" type="text/javascript"></script>
+<script src="/js/jquery.bpopup.js"></script>
+<script src="/js/jquery.autocomplete.min.js"></script>
+<!-- page script -->
+<script type="text/javascript">
+    $(function () {
+        $('#dataTable').dataTable({
+            "bSort": true//排序
+        });
+
+        function generate_community_item(name, id) {
+            return '<div id="COMMUNITY' + id + '" class="row" style="margin: 10px;border-bottom: solid 1px #eaeaea"><span class="col-md-4">' + name +
+                    '</span><span class="col-md-2" style="padding-left: 30px"><button type="button" class="unbindButton btn btn-danger" data-communityid="' + id + '">解除绑定</button>' +
+                    '</span></div>';
+        }
+
+        function bindUnbindButton() {
+
+            $('.unbindButton').unbind('click');
+            $('.unbindButton').click(function () {
+                $.post('/console/api/commy/del_link', {'shop_id': curShop, 'c_id': $(this).data('communityid')}, function (resp) {
+                    if (resp.code != 0) {
+                        window.alert('解除绑定失败');
+                        return;
+                    }
+                    window.alert('解除绑定成功');
+
+                    refreshBindCommunity();
+
+                });
+            });
+        }
+
+        var curShop = null, curShopName = null;
+
+        function refreshBindCommunity() {
+            $('#alreadyBindCommunity').empty();
+            $('#gettingCommunityStatus').text('(加载小区列表...)');
+            $.post('/console/api/commy/get_links', {'shop_id': curShop}, function (resp) {
+                var commu = resp;
+                for (var i = 0; i < commu.length; i++) {
+                    $('#alreadyBindCommunity').append(
+                            generate_community_item(commu[i].name, commu[i].id)
+                    )
+                }
+
+                $('#gettingCommunityStatus').text('(加载完成)');
+
+                bindUnbindButton();
+            });
+        }
+
+        $('.e-bindButton').click(function () {
+            curShop = $(this).data('shopid');
+            curShopName = $(this).data('shopname');
+
+            $('#curShopName').text(curShopName);
+
+            $('#bindCom').bPopup();
+
+            refreshBindCommunity();
+
+        });
+
+        var curCommu = null;
+        $('#autocomplete').autocomplete({
+            paramName: 'key',
+            serviceUrl: '/sg/commy/search',
+            minChars: 0,
+            noSuggestionNotice: '没有匹配的小区',
+            appendTo: '#autocomplete-sugg',
+            transformResult: function (response) {
+                response = JSON.parse(response);
+                return {
+                    suggestions: $.map(response.data.communitys, function (dataItem) {
+                        return {value: dataItem.name, data: dataItem.id};
+                    })
+                };
+            },
+            onSelect: function (suggestion) {
+                curCommu = suggestion;
+                $('#curCommunityName').text(curCommu.value);
+            }
+        });
+
+        $('#performBind').click(function () {
+            $.post('/console/api/commy/add_link', {'shop_id': curShop, 'c_id': curCommu.data}, function (resp) {
+                if (resp.code != 0) {
+                    window.alert('绑定失败');
+                    return;
+                }
+                window.alert('绑定成功');
+                $('#alreadyBindCommunity').prepend(
+                        generate_community_item(curCommu.value, curCommu.data)
+                );
+                bindUnbindButton();
+            });
+        });
+        $('#myModal').modal({
+            keyboard: true,//Esc 退出
+            show: false, // 上来不显示
+            backdrop: false//点击阴影部分不关闭
+
+        });
+        /*$(".daixiandnkasndjasndjansjdnasjdnas").click(function () {
+            $('#myModal').modal('show');
+        });*/
+        /*       $('#myModal').on('hide.bs.modal', function () {//当调用 hide 实例方法时触发。
+                   var result = confirm("隐藏时调用我");
+                   var oThis = $(this);// 关闭Model 触发
+                   if (result) {
+                       $.ajax({
+                           type: "POST", url: "/console/shopArea/del",
+                           data: {sa_id: oThis.data('sa_id')},
+                           success: function (data) {
+                               //alert(data);
+                               location.reload();
+                           }
+                       });
+                   }
+               });*/
+        /**
+         * 显示：$('#myModal').modal('show');
+
+         隐藏：$('#myModal').modal('hide');
+
+         开关：$('#myModal').modal('toogle');
+
+         事件:   $('#myModal').on('hidden', function () {// do something…});*/
+    });
+</script>
+<script type="text/javascript">
+    function submitForm(text) {
+        if (confirm("确认上传?")) {
+            //  $(".container-fluid").css("display", "none");
+            showMask();
+        } else {
+            return false;
+        }
+        return true;
+    }
+    function showMask() {
+        $('body').css("overflow", "hidden")
+        $("#cover").show();
+    }
+</script>
+</body>
+</html>

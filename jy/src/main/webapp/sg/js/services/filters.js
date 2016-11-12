@@ -1,0 +1,49 @@
+;angular.module('miaomiao.shop').filter('getTotolCount',function () {
+    return function (input) {
+        input = input || [];
+
+        var total = 0;
+        for (var item_idx = 0; item_idx < input.length; item_idx++) {
+            total += parseInt(input[item_idx].count || 0);
+        }
+        return total;
+    };
+}).filter('getTotolPrice',function () {
+        return function (input) {
+            input = input || [];
+
+            var total = 0.0;
+            for (var item_idx = 0; item_idx < input.length; item_idx++) {
+                total += parseFloat(input[item_idx].price || 0.0) * parseInt(input[item_idx].count || 0);
+            }
+            return Math.round((total / 100.0) * 100)/100 ;
+        };
+
+    }).filter('changeTwoDecimal', function () {
+        return function (num) {
+            if(num <= 0) return 0.0;
+            return Math.round(num*100)/100; // Characters after Colon
+        };
+    }).filter('removeAMPM', function () {
+        return function (text) {
+            if(!text) return;
+            return text.replace(/AM/, '').replace(/PM/, ''); // Characters after Colon
+        };
+    }).filter('getShopStatusString', function () {
+        return function(input){
+            return input == 0 ? "营业中":"打烊了";
+        }
+    }).filter('getShopMinPrice', function () {
+        return function(input){
+            return input ? input/100 : 20;
+        }
+    }).filter('insertSpaceForShortName', function () {
+        return function(input){
+            return input.length == 2 ? input.charAt(0) + "    " + input.charAt(1) : input;
+        }
+    }).filter('parseIntDistant', function () {
+        return function(input){
+            return parseInt(input);
+        }
+    });
+

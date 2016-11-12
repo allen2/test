@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>Dashboard Template for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/js/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/console.css" rel="stylesheet">
+    <style>
+        td {
+            width: auto;
+        }
+
+        .cover {
+            position: fixed;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            filter: alpha(opacity=60);
+            background-color: #777;
+            z-index: 1002;
+            left: 0px;
+            display: none;
+            opacity: 0.5;
+            -moz-opacity: 0.5;
+        }
+
+        #loading-mask {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 20000;
+            background-color: gray;
+        }
+
+        #loading {
+            position: absolute;
+            left: 38%;
+            top: 40%;
+            padding: 2px;
+            z-index: 20001;
+            height: auto;
+        }
+
+        #loading .loading-indicator {
+            background: gray;
+            color: #444;
+            font: bold 20px tahoma, arial, helvetica;
+            padding: 10px;
+            margin: 0;
+            width: 500px;
+            height: 300px;
+        }
+
+        #loading-msg {
+            font: normal 18px arial, tahoma, sans-serif;
+        }
+    </style>
+    <!-- Bootstrap core CSS -->
+    <script type="text/javascript" src="/js/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        function submitForm(text) {
+            if (confirm("确认上传?")) {
+                //  $(".container-fluid").css("display", "none");
+                showMask();
+            } else {
+                return false;
+            }
+            return true;
+        }
+        function showMask() {
+            $('body').css("overflow", "hidden")
+            $("#cover").show();
+        }
+    </script>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"> Cat </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-rightd" style="position: absolute;z-index: 9999;left: 50%;top:15%">
+                <li>
+                    <button class="btn btn-primary">下载BD工具</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id="cover" class="cover">
+    <div id='loading-mask'></div>
+    <div id="loading">
+        <div class="loading-indicator">
+            <img src="/images/loading.gif" width="250px" height="250px" style="position:absolute;left:30%;top:13%;vertical-align:top;"/>
+            <span id="loading-msg" style="position:absolute;left:48%;top:53%;vertical-align:top;color:black;">上传中 ...</span>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="width: 100%">
+    <div class="row">
+        <div class="col-sm-12 col-sm-offset-0 col-md-12 col-md-offset-0 main" style="padding-top:60px">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th nowrap>店铺区域</th>
+                        <th nowrap>店铺名字</th>
+                        <th>店铺电话</th>
+                        <th nowrap>店铺老板</th>
+                        <th>店长电话</th>
+                        <th nowrap>商品详情</th>
+                        <th>店铺地址</th>
+                        <th>小区绑定</th>
+                        <th>上传条码</th>
+                        <th>续传条码</th>
+                        <th nowrap>上架哈哈镜</th>
+                        <th nowrap>上架桶装水</th>
+                        <th nowrap>上架香烟</th>
+                    </tr>
+                    </thead>
+                    #foreach($shop in $shopls)
+                        <tr>
+                            <td>$shop.id</td>
+                            <td class="edit" id="${shop.id}-shop_area">#if($shop.ext)$shop.ext#end</td>
+
+                            <td class="edit" id="${shop.id}-name">$shop.name</td>
+                            <td class="edit" id="${shop.id}-tel">$shop.tel</td>
+                            <td class="edit" id="${shop.id}-owner">$shop.owner</td>
+                            <td>$shop.owner_phone</td>
+                            <td><a href="/console/tools/shopInfo?shop_id=${shop.id}">商品详情</a></td>
+                            <td>$shop.shop_address</td>
+                            <td class="button" id="e-${shop.id}-bind">
+                                <button type="button" class="e-bindButton btn btn-success" data-shopid="${shop.id}" data-shopname="${shop.name}">绑定小区</button>
+                            </td>
+                            <td>
+                                <form action="/console/tools/uploadFile" method="post" enctype="multipart/form-data"
+                                      onsubmit="return submitForm('确认上传?');">
+                                    <input type="hidden" name="shop_id" value="${shop.id}"/>
+
+                                    <div class="form-group">
+                                        <input id="uploadFile1" type="file" name="file" required style="display:inline-block">
+                                    </div>
+                                    <div class="btn111">
+                                        <button class="btn btn-success" type="submit">确定</button>
+                                    </div>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/console/tools/replenish" method="post" enctype="multipart/form-data"
+                                      onsubmit="return submitForm('确认上传?');">
+                                    <input type="hidden" name="shop_id" value="${shop.id}"/>
+
+                                    <div class="form-group">
+                                        <input id="uploadFile2" type="file" name="file" required style="display:inline-block">
+                                    </div>
+                                    <div class="btn111">
+                                        <button class="btn btn-success" type="submit">确定</button>
+                                    </div>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/console/tools/mvhhj" method="post" onsubmit="return  submitForm('确认上架哈哈镜?');">
+                                    <input type="hidden" name="to_shop_id" value="${shop.id}"/>
+
+                                    <div class="btn111">
+                                        <button class="btn btn-success" type="submit">确定</button>
+                                    </div>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/console/tools/mvtzs" method="post" onsubmit="return  submitForm('确认上架桶装水?');">
+                                    <input type="hidden" name="to_shop_id" value="${shop.id}"/>
+
+                                    <div class="btn111">
+                                        <button class="btn btn-success" type="submit">确定</button>
+                                    </div>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/console/tools/mvxy" method="post" onsubmit="return  submitForm('确认上架香烟?');">
+                                    <input type="hidden" name="to_shop_id" value="${shop.id}"/>
+
+                                    <div class="btn111">
+                                        <button class="btn btn-success" type="submit">确定</button>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    #end
+                </table>
+                <nav>
+                    <ul class="pager">
+                        #if($previous_f)
+                            <li>                            ##//2015-04-09 update offset value 100 by ZhaoXiuFei
+                                <a href="/console/allshop?from=$previous_f&offset=100">Previous</a></li>
+                        #end
+                        #if($next_f)                    ##//2015-04-09 update offset value 100 by ZhaoXiuFei
+                            <li><a href="/console/allshop?from=$next_f&offset=100">Next</a></li>
+                        #end
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bindCom" id="bindCom" style="display: none;padding-top: 100px; width: 60%;height: 100%;">
+    <div style=";background-color: white;width: 100%;height: 100%;padding: 20px 5px">
+
+        <h1 style="text-align: center;">绑定小区:<span id="curCommunityName"></span> 到店铺:<span id="curShopName"></span></h1>
+
+        <div style="margin-top: 20px;text-align: center">
+            <input type="text" name="country" id="autocomplete" style="width: 60%" placeholder="输入小区名字"/><span>
+            <button type="button" class="btn btn-success" id="performBind">绑定此小区</button>
+        </span>
+        </div>
+
+        <div id="autocomplete-sugg">
+        </div>
+        <h2 style="background-color: #eaeaea;font-size: 20px;margin-top: 20px">已经绑定的小区<span id="gettingCommunityStatus"></span></h2>
+
+        <div style=";max-height: 200px;overflow: auto" id="alreadyBindCommunity"></div>
+    </div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" style="padding-top:10%; background-color: #2a85a0" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h2 class="modal-title text-center" id="myModalLabel">
+                    QQ 扫码二维码下载
+                </h2>
+            </div>
+            <div class="modal-body text-center">
+                <img src="/images/BDTools.png">
+            </div>
+            <div class="modal-footer text-center">
+                <h3 class="modal-title text-center" id="myModalLabel">
+                    相信自己是最好的!
+                </h3>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/js/jquery/dist/jquery.min.js"></script>
+<script src="/js/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/js/jquery.bpopup.js"></script>
+<script src="/js/jquery.autocomplete.min.js"></script>
+<script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.edit').editable('/console/tools/edit', {
+            tooltip: 'Click to edit...',
+            callback: function (value, settings) {
+                location.reload();
+            }
+        });
+        $('.edit_area').editable('/console/allshop/edit', {
+            type: 'textarea',
+            cancel: 'Cancel',
+            submit: 'OK',
+            indicator: '<img src="img/indicator.gif">',
+            tooltip: 'Click to edit...'
+        });
+
+        function generate_community_item(name, id) {
+            return '<div id="COMMUNITY' + id + '" class="row" style="margin: 10px;border-bottom: solid 1px #eaeaea"><span class="col-md-4">' + name +
+                    '</span><span class="col-md-2" style="padding-left: 30px"><button type="button" class="unbindButton btn btn-danger" data-communityid="' + id + '">解除绑定</button>' +
+                    '</span></div>';
+        }
+
+        function bindUnbindButton() {
+
+            $('.unbindButton').unbind('click');
+            $('.unbindButton').click(function () {
+                $.post('/console/api/commy/del_link', {'shop_id': curShop, 'c_id': $(this).data('communityid')}, function (resp) {
+                    if (resp.code != 0) {
+                        window.alert('解除绑定失败');
+                        return;
+                    }
+                    window.alert('解除绑定成功');
+
+                    refreshBindCommunity();
+
+                });
+            });
+        }
+
+        var curShop = null, curShopName = null;
+
+        function refreshBindCommunity() {
+            $('#alreadyBindCommunity').empty();
+            $('#gettingCommunityStatus').text('(加载小区列表...)');
+            $.post('/console/api/commy/get_links', {'shop_id': curShop}, function (resp) {
+                var commu = resp;
+                for (var i = 0; i < commu.length; i++) {
+                    $('#alreadyBindCommunity').append(
+                            generate_community_item(commu[i].name, commu[i].id)
+                    )
+                }
+
+                $('#gettingCommunityStatus').text('(加载完成)');
+
+                bindUnbindButton();
+            });
+        }
+
+        $('.e-bindButton').click(function () {
+            curShop = $(this).data('shopid');
+            curShopName = $(this).data('shopname');
+
+            $('#curShopName').text(curShopName);
+
+            $('#bindCom').bPopup();
+
+            refreshBindCommunity();
+
+        });
+
+        var curCommu = null;
+        $('#autocomplete').autocomplete({
+            paramName: 'key',
+            serviceUrl: '/sg/commy/search',
+            minChars: 0,
+            noSuggestionNotice: '没有匹配的小区',
+            appendTo: '#autocomplete-sugg',
+            transformResult: function (response) {
+                response = JSON.parse(response);
+                return {
+                    suggestions: $.map(response.data.communitys, function (dataItem) {
+                        return {value: dataItem.name, data: dataItem.id};
+                    })
+                };
+            },
+            onSelect: function (suggestion) {
+                curCommu = suggestion;
+                $('#curCommunityName').text(curCommu.value);
+            }
+        });
+
+        $('#performBind').click(function () {
+            $.post('/console/api/commy/add_link', {'shop_id': curShop, 'c_id': curCommu.data}, function (resp) {
+                if (resp.code != 0) {
+                    window.alert('绑定失败');
+                    return;
+                }
+                window.alert('绑定成功');
+                $('#alreadyBindCommunity').prepend(
+                        generate_community_item(curCommu.value, curCommu.data)
+                );
+                bindUnbindButton();
+            });
+        });
+
+        $('.btn-primary').click(function () {
+            //window.location.href = "/tool/www/build/CatStaffTool.apk"
+            $('#myModal').modal('show');
+        })
+        $('#myModal').modal({
+            keyboard: true,//Esc 退出
+            show: false, // 上来不显示
+            backdrop: false//点击阴影部分不关闭
+        });
+    });
+</script>
+</body>
+</html>

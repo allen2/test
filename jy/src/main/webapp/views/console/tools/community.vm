@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cat</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link rel="shortcut icon" href="/icon/favicon.png">
+    <!-- bootstrap 3.0.2 -->
+    <link href="/system/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <!-- font Awesome -->
+    <link href="/system/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <!-- Ionicons -->
+    <link href="/system/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+    <!-- DATA TABLES -->
+    <link href="/system/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+    <!-- Theme style -->
+    <link href="/system/css/AdminLTE.css" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="skin-blue">
+<!-- header logo: style can be found in header.less -->
+<header class="header">
+    #include("/views/console/logo.html")
+    <!-- Header Navbar: style can be found in header.less -->
+    #include("/views/console/topToolBar.html")
+</header>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    <!-- Left side column. contains the logo and sidebar -->
+    #include("/views/console/tree.html")
+    <!-- Right side column. Contains the navbar and content of the page -->
+    <aside class="right-side">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                小区维护
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i>内部工具</a></li>
+                <li class="active"><a href="#">小区维护</a></li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="bg-olive" style="margin-left: 10px;"><a href="#" data-toggle="modal" data-target="#myModal">添加小区</a></li>
+                                <li class="bg-olive" style="margin-left: 10px;"><a href="/console/community">查看所有</a></li>
+                                <li style="margin-right: 50px;">
+                                    <form class="navbar-form navbar-right" action="/console/community" method="post">
+                                        <input name="value" type="text" class="form-control" placeholder="Search...">
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body table-responsive">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>小区</th>
+                                    <th>城市</th>
+                                    <th>区域</th>
+                                    <th>地址</th>
+                                    <th>lng</th>
+                                    <th>lat</th>
+                                    <th>创建时间</th>
+                                    <th>修改时间</th>
+                                    <th>操作</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    #foreach($community in $communityList)
+                                    <tr>
+                                        <td>$community.id</td>
+                                        <td class="edit" id="${community.id}-name">$community.name</td>
+                                        <td class="edit" id="${community.id}-city">$community.city</td>
+                                        <td class="edit" id="${community.id}-district">$community.district</td>
+                                        <td class="edit" id="${community.id}-address">$community.address</td>
+                                        <td class="edit" id="${community.id}-lng">$community.lng</td>
+                                        <td class="edit" id="${community.id}-lat">$community.lat</td>
+                                        <td>$community.create_time</td>
+                                        <td>#if($community.update_time) $community.update_time #end</td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-sm" data-id="${community.id}">删除</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-success btn-sm" data-id="${community.id}">加到线上</button>
+                                        </td>
+                                    </tr>
+                                    #end
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>小区</th>
+                                    <th>城市</th>
+                                    <th>区域</th>
+                                    <th>地址</th>
+                                    <th>lng</th>
+                                    <th>lat</th>
+                                    <th>创建时间</th>
+                                    <th>修改时间</th>
+                                    <th>操作</th>
+                                    <th>操作</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                            <nav>
+                                <ul class="pager">
+                                    #if($previous_f)
+                                        <li>
+                                            <a href="/console/community?previous_f=$previous_f&value=$value">Previous</a></li>
+                                    #end
+                                    #if($next_f)
+                                        <li><a href="/console/community?next_f=$next_f&value=$value">Next</a></li>
+                                    #end
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </aside>
+    <!-- /.right-side -->
+</div>
+<!-- ./wrapper -->
+<!-- 模态框（Modal） -->
+<div class="modal fade" style="padding-top:5%; background-color: #2a85a0" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h2 class="modal-title text-center" id="myModalLabel">
+                    添加小区
+                </h2>
+            </div>
+            <form class="form-horizontal" method="post" action="/console/community/insert">
+                <div class="modal-body container" style="width: 80%">
+                    <div class="form-group" style="padding-top: 30px;">
+                        <input type="text" name="name" class="form-control" placeholder="馨泰园小区" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="city" class="form-control" placeholder="北京市" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="district" class="form-control" placeholder="海淀区" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="address" class="form-control" placeholder="信息路36号甲" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="lng" class="form-control" placeholder="116.652305603027" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="lat" class="form-control" placeholder="39.892810821533" required>
+                    </div>
+                </div>
+                <div class="modal-footer text-center">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">添加</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- jQuery 2.0.2 -->
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/system/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- DATA TABES SCRIPT -->
+<script src="/system/js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+<script src="/system/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+<!-- AdminLTE App -->
+<script src="/system/js/AdminLTE/app.js" type="text/javascript"></script>
+<script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
+<!-- page script -->
+<script type="text/javascript">
+    $(function () {
+        $('#dataTable').dataTable({
+            "bSort": true//排序
+        });
+        $('.edit').editable('/console/community/update', {
+            tooltip: 'Click to edit...',
+            callback: function (value, settings) {
+                location.reload();
+            }
+        });
+        $(".btn-danger").click(function () {
+            var result = confirm("是否确认删除"),
+                    oThis = $(this);
+            if (result) {
+                $.ajax({
+                    type: "POST", url: "/console/community/del",
+                    data: {id: oThis.data('id')},
+                    success: function (data) {
+                        alert(data.msg);
+                        location.reload();
+                    },
+                });
+            }
+        });
+        $(".btn-success").click(function () {
+            var result = confirm("确认添加到线上?"),
+                    oThis = $(this);
+            if (result) {
+                $.ajax({
+                    type: "POST", url: "/console/community/addOnlin",
+                    data: {id: oThis.data('id')},
+                    success: function (data) {
+                        alert(data.msg);
+                        location.reload();
+                    }
+                });
+            }
+        });
+        $('#myModal').modal({
+            keyboard: true,//Esc 退出
+            show: false, // 上来不显示
+            backdrop: false//点击阴影部分不关闭
+
+        });
+        /*$(".daixiandnkasndjasndjansjdnasjdnas").click(function () {
+            $('#myModal').modal('show');
+        });*/
+        /*       $('#myModal').on('hide.bs.modal', function () {//当调用 hide 实例方法时触发。
+                   var result = confirm("隐藏时调用我");
+                   var oThis = $(this);// 关闭Model 触发
+                   if (result) {
+                       $.ajax({
+                           type: "POST", url: "/console/shopArea/del",
+                           data: {sa_id: oThis.data('sa_id')},
+                           success: function (data) {
+                               //alert(data);
+                               location.reload();
+                           }
+                       });
+                   }
+               });*/
+        /**
+         * 显示：$('#myModal').modal('show');
+
+         隐藏：$('#myModal').modal('hide');
+
+         开关：$('#myModal').modal('toogle');
+
+         事件:   $('#myModal').on('hidden', function () {// do something…});*/
+    });
+</script>
+
+</body>
+</html>

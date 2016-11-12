@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.org/1999/html">
+<head>
+    <meta  charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content>
+    <meta name="description" content>
+    <link rel="shortcut icon" href="/images/homePage/favicon.png">
+    <title>喵喵生活</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/js/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/fontawome_v2.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="(max-width:800px), screen and (max-width:1950px)" href="/css/pc.css">
+    <link rel="stylesheet" type="text/css" media="(max-width:320px), screen and (max-width:420px)" href="/css/phone.css">
+
+
+    <style>
+        #arial{
+
+            font-family:"Arial";
+
+        }
+        html *{
+
+            font-family:"Microsoft YaHei";
+
+
+        }
+        p *{
+
+            font-size:12px;
+
+        }
+
+        pricing h3{
+
+            padding-top:5%;
+
+        }
+
+        .features .col-lg-4:first-child .icon-stack-base {
+            color: #52AD81;
+        }
+        .features .col-lg-4:nth-child(2) .icon-stack-base {
+            color: #CD5A48;
+        }
+        .features .col-lg-4:last-child .icon-stack-base {
+            color: #51A9D6;
+        }
+        section.slider {
+            color: #ffffff;
+            background: #ffc561;
+
+            font-size:1.2em;
+        }
+        .inner-page {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+        }
+        section.slider h2 {
+            margin-bottom: 20px;
+        }
+        .inner-page {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+        }
+        div.feature-box div.feature-box-icon {
+            -moz-border-radius: 35px;
+            -webkit-border-radius: 35px;
+            background: #ffffff;
+            border-radius: 35px;
+            color: #52AD81;
+            display: inline-block;
+            float: left;
+            height: 35px;
+            line-height: 35px;
+            margin-right: 10px;
+            position: relative;
+            text-align: center;
+            top: 5px;
+            width: 35px;
+        }
+        div.feature-box div.feature-box-info {
+            padding-left: 50px;
+        }
+        footer *{
+            font-family:"Microsoft YaHei";
+
+
+        }
+
+        footer a{
+
+            color:#999999
+
+        }
+
+
+        .jumbotron {
+            /* background: url(/images/homePage/background-pure.jpg); */
+            color: #ffffff;
+            background-color: rgba(240,79,84,1.0);
+            background-attachment: fixed;
+        }
+
+
+
+
+
+    </style>
+
+</head>
+<body data-spy="scroll" data-target="#topnav">
+
+<div class="navbar navbar-inverse navbar-fixed-top" id="topnav">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"> 喵喵生活</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#home">首页</a></li>
+                <li><a href="#services">服务特点</a></li>
+                <li><a href="#features">App下载</a></li>
+                <!--<li><a href="#products">App下载</a></li>-->
+                <!--<li><a href="#clients">合作商家</a></li>-->
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </div>
+        <!--/.navbar-collapse -->
+    </div>
+</div>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron" id="home">
+
+
+
+    <div class="text-center logo-image">
+        <a href="#" style="width:10%;overflow:hidden">
+            <img class="text-center" src="/images/homePage/logo-page.png" style="max-width:100%;height:auto;">
+        </a>
+    </div>
+
+
+
+</div>
+
+<div class="container" id="services">
+    <!-- Example row of columns -->
+    <div class="row features services-function">
+        <div class="col-md-4 col-xs-4 text-center">
+            <div class="single-fet">
+                <div style="margin-bottom:15px;">
+                    <img class="text-center" src="/images/homePage/1.png" style="max-width:50%;height:auto"/>
+                </div>
+                <h6><b>线上线下<p class="services-padding">一键结合</p></h6>
+
+
+
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-4 text-center">
+            <div class="single-fet">
+                <div style="margin-bottom:15px;">
+                    <img class="text-center" src="/images/homePage/2.png" style="max-width:50%;height:auto"/>
+                </div>
+                <h6><b>流畅购物体验<p class="services-padding">快捷订单提醒</p></h6>
+
+
+
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-4 text-center">
+            <div class="single-fet">
+                <div style="margin-bottom:15px;">
+                    <img class="text-center" src="/images/homePage/3.png" style="max-width:50%;height:auto"/>
+                </div>
+                <h6><b>轻松线上开店<p class="services-padding">APP后台管理</p></h6>
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-12 col-md-12 col-xs-12">
+
+        </div>
+        <div class="col-lg-12 col-md-12 col-xs-12">
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<section class="slider" id="features">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-6 col-xs-6 col-xs-push-2">
+
+            </div>
+
+            <div class="col-md-6 col-xs-6" style="margin-top:3em;position:relative;top:3em;">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="wrap">
+        <a href="#" style="width:100%;height:auto;position:relative;top:0px;left:20%;vertical-align:middle;display:inline">
+            <img src="/images/homePage/12.png" style="max-width:35%;height:auto"/>
+            <p class="slider-wx">
+
+                <img src="/images/homePage/11.png" style="max-width:10%;height:auto">
+                &nbsp微信公众号
+                <br>
+			<span class="slider-wxs">
+					扫一扫，微信下单
+			</span>
+            </p>
+
+        </a>
+
+    </div>
+
+
+
+
+</section>
+
+<section class="pricing" id="products">
+
+    <div class="container" style="margin-bottom:30px">
+        <div class="row">
+            <div class="col-md-12 pricing-intro pdd">
+                <h3 class="page-headline large text-center"><b>商家端APP下载</b></h3>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+
+        <div class="row pricing-table" style="margin-top:-20px">
+            <div class="col-md-3  col-xs-8 col-xs-push-2 col-lg-3 text-center">
+                <div class="panel panel-success">
+                    <div class="panel-heading text-center row" style="background:#55db68;color:#ffffff;">
+
+                        <div class="col-md-4 col-xs-4 col-xs-pull-1">
+
+                            <i><img src="/images/homePage/7.png" style="max-width:100%;height:auto;vertical-align:middle"/></i>
+                        </div>
+
+                        <div class=" col-md-4 col-xs-4 col-xs-pull-1 pricing-padding pricing-footer">
+
+                            <span style="font-size:24px;text-align:center;" id="arial" class="pricing-iphone">iPhone</span>
+
+                        </div>
+                        <div class="col-md-4 col-xs-4 col-xs-push-2 pricing-padding col-xs-pull-1">
+
+                            <a href="https://fir.im/mmshsj"><img src="/images/homePage/10.png"  style="max-width:100%;height:auto;vertical-align:middle"/></a>
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+            <div class="col-md-3  col-xs-8 col-xs-push-2 col-md-push-3 col-md-pull-2 col-lg-3 text-center">
+                <div class="panel panel-info">
+
+                    <div class="panel-heading row" style="background:#55b4db;color:#ffffff">
+
+                        <div class="col-xs-4 col-xs-pull-1 col-md-4">
+
+                            <i><img src="/images/homePage/8.png" style="max-width:100%;height:auto;vertical-align:middle"/></i>
+                        </div>
+
+                        <div class="col-xs-4 col-xs-pull-1  pricing-padding col-md-4">
+
+                            <span class="pricing-android" style="font-size:24px;text-align:center" id="arial">Android</span>
+
+                        </div>
+                        <div class="col-xs-4 col-xs-push-2  pricing-padding col-md-4">
+
+                            <a href="https://fir.im/hvqu"><img src="/images/homePage/10.png"  style="max-width:100%;height:auto;vertical-align:middle"/></a>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="background-color:#ffc561;padding-top:20px;width:100%">
+
+    </div>
+
+
+
+</section>
+
+
+<section class="contact" id="contact">
+
+    <div class="container text-center">
+
+        <div class="row">
+
+            <div class="col-lg-4">
+            </div>
+
+            <div class="col-lg-4">
+            </div>
+
+            <div class="col-lg-4">
+            </div>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-ribbon" style="right: 0">
+                <h3 class="title" style="margin: 0;padding: 5px 10px"></h3>
+            </div>
+
+        </div>
+    </div>
+    <div class="footer-copyright" >
+        <div class="container">
+            <div class="row text-center" style="margin-top:20px">
+
+
+                <div class="col-md-6 col-xs-6" style="padding-left:5%;">
+
+
+                    <div class="footer-left" style="">
+                        <img src="/images/homePage/5.png" style="max-width:40%;height:auto;vertical-align:middle;"/>
+                    </div>
+
+                    <div class="footer-right text-justify" style="">
+                        <h4 id="footer-c"><b>联系我们</b></h4>
+                        <p>电话:400-881-6807</p>
+                        <p>邮箱:dev@lizi-inc.com</p>
+                    </div>
+
+
+                </div>
+
+                <div class="col-md-6 col-xs-6"">
+
+
+                <div class="footer-left">
+                    <img src="/images/homePage/6.png" style="max-width:40%;height:auto;vertical-align:middle;"/>
+                </div>
+
+                <div class="footer-right text-nowrap text-left">
+                    <h4 id="footer-c"><b>公司地址</b></h4>
+                    <p>北京市海淀区上地</p>
+
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+
+        <hr>
+    </div>
+    </div>
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-lg-12">
+                <p><span id="footer-9">喵喵生活</span><a href="http://www.miibeian.gov.cn/" style="margin-left:1em">苏ICP备14060146号</a> </p>
+
+                <p><a href="http://www.miibeian.gov.cn/">无锡栗子网络科技有限公司(Wuxi Chestnut Company Limited)</a></p>
+            </div>
+
+        </div>
+    </div>
+
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/js/jquery/dist/jquery.min.js"></script>
+<script src="/js/bootstrap/dist/js/bootstrap.min.js"></script>
+<script>
+
+    $("#copy-button").click(function(){
+        $("#copy-button").text($("#copy-button").data('clipboard-text'));
+    })
+
+</script>
+
+
+</body>
+</html>
